@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from './CodeInput.module.css';
 import {Container, Textarea, Modal, Button} from "@mantine/core";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 
-function CodeInput() {
-    const [code, setCode] = useState('');
+function CodeInput(props: {
+    code: string,
+    setCode: Dispatch<SetStateAction<string>>
+}) {
     const [opened, setOpened] = useState(false);
 
     return <Container>
@@ -19,11 +21,11 @@ function CodeInput() {
                 minRows={2}
                 maxRows={20}
                 autosize
-                onChange={(event) => setCode(event.currentTarget.value)}
-            >{code}</Textarea>
+                onChange={(event) => props.setCode(event.currentTarget.value)}
+            >{props.code}</Textarea>
             <Button onClick={() => setOpened(false)}>Close</Button>
         </Modal>
-        <SyntaxHighlighter language="kotlin">{code}</SyntaxHighlighter>
+        <SyntaxHighlighter language="kotlin">{props.code}</SyntaxHighlighter>
         <Button onClick={() => setOpened(true)}>Edit...</Button>
     </Container>
 }
