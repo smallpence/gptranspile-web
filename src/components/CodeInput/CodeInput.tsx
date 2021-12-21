@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styles from './CodeInput.module.css';
-import {Prism} from "@mantine/prism";
 import {Container, Textarea} from "@mantine/core";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
