@@ -1,5 +1,6 @@
 import React from 'react';
 import {AppShell, Header, Title, Text, Container} from "@mantine/core";
+import CodeInput from "./components/CodeInput/CodeInput";
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
           <Container size="md">
               <Text>This is the first display of GPTranspile!</Text>
               <Text>Not much going on so far...</Text>
+              <CodeInput/>
           </Container>
       </AppShell>
   );
