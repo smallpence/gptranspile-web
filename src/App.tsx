@@ -1,14 +1,17 @@
 import React from 'react';
-import {Button} from "@mantine/core";
+import {AppShell, Header, Title, Text, Container} from "@mantine/core";
 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Button>Mantine button!</Button>
-      </header>
-    </div>
+      <AppShell
+          header={<Header height={60} padding = "xs"><Title>GPTranspile</Title></Header>}
+      >
+          <Container size="md">
+              <Text>This is the first display of GPTranspile!</Text>
+              <Text>Not much going on so far...</Text>
+          </Container>
+      </AppShell>
   );
 }
 
