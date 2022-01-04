@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import SessionInit from "./components/SessionInit/SessionInit";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App/>}/>
+                <Route path="/session" element={<SessionInit/>}/>
+            </Routes>
+        </BrowserRouter>
+    </React.StrictMode>,
   document.getElementById('root')
 );
 
