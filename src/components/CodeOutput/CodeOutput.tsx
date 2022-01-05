@@ -15,6 +15,7 @@ interface GPT3Response {
 
 function CodeOutput(props: {code: string, signedIn: boolean}) {
     const [output, setOutput] = useState("");
+    const url = process.env["REACT_APP_URL"]
 
     const queryGPT = async () => {
         // var res = await fetch("https://api.openai.com/v1/engines/davinci/completions", {
@@ -34,7 +35,8 @@ function CodeOutput(props: {code: string, signedIn: boolean}) {
             return;
         }
 
-        const res = await fetch("http://127.0.0.1:8000/auth/foo", {
+        console.log(`${url}/auth/foo`);
+        const res = await fetch(`${url}/auth/foo`, {
             method: "GET",
             credentials: "include"
         });
