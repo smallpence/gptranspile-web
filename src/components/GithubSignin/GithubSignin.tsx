@@ -9,7 +9,7 @@ const GithubSignin = (props: {
 }) => (
   <div className={styles.GithubSignin} data-testid="GithubSignin">
       { !props.signedIn
-          ? <a href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${URL}/auth/`}>Log in with Github</a>
+          ? <a href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${URL}/backend/auth`}>Log in with Github</a>
           : <p>Signed in</p>
       }
   </div>
