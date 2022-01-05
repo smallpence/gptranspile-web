@@ -18,10 +18,7 @@ function CodeOutput(props: {code: string, signedIn: boolean}) {
     const url = process.env["REACT_APP_URL"]
 
     const queryGPT = async () => {
-        if (!props.signedIn) {
-            setOutput("not signed in");
-            return;
-        }
+        if (!props.signedIn) return "not signed in";
 
         const res = await fetch(`${url}/backend/gpt3`, {
             method: "GET",
@@ -31,13 +28,15 @@ function CodeOutput(props: {code: string, signedIn: boolean}) {
                 'language': "java"
             }
         });
-        const body = await res.text();
-
-        setOutput(body);
+        if (!res.ok) return "error"
+        return await res.text();
     }
 
     useEffect(() => {
-        queryGPT()
+        (async () => {
+            const data = await queryGPT()
+            setOutput(data)
+        })();
     }, [props.code])
 
     return <div className={styles.CodeOutput} data-testid="CodeOutput">
