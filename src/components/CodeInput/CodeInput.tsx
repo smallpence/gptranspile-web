@@ -10,6 +10,7 @@ function CodeInput(props: {
     signedIn: boolean
 }) {
     const [opened, setOpened] = useState(false);
+    const [buffer, setBuffer] = useState("")
 
     return <Container>
         <Modal
@@ -22,9 +23,13 @@ function CodeInput(props: {
                 minRows={2}
                 maxRows={20}
                 autosize
-                onChange={(event) => props.setCode(event.currentTarget.value)}
-            >{props.code}</Textarea>
-            <Button onClick={() => setOpened(false)}>Close</Button>
+                onChange={(event) => setBuffer(event.currentTarget.value)}
+                defaultValue={props.code}
+            />
+            <Button onClick={() => {
+                setOpened(false);
+                props.setCode(buffer);
+            }}>Close</Button>
         </Modal>
         <SyntaxHighlighter language="kotlin">{props.code}</SyntaxHighlighter>
         { props.signedIn &&
