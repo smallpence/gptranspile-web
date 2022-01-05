@@ -6,7 +6,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 function CodeInput(props: {
     code: string,
-    setCode: Dispatch<SetStateAction<string>>
+    setCode: Dispatch<SetStateAction<string>>,
+    signedIn: boolean
 }) {
     const [opened, setOpened] = useState(false);
 
@@ -26,7 +27,9 @@ function CodeInput(props: {
             <Button onClick={() => setOpened(false)}>Close</Button>
         </Modal>
         <SyntaxHighlighter language="kotlin">{props.code}</SyntaxHighlighter>
-        <Button onClick={() => setOpened(true)}>Edit...</Button>
+        { props.signedIn &&
+            <Button onClick={() => setOpened(true)}>Edit...</Button>
+        }
     </Container>
 }
 

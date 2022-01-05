@@ -5,7 +5,7 @@ import CodeOutput from './CodeOutput';
 
 describe('<CodeOutput />', () => {
   test('it should mount', () => {
-    render(<CodeOutput code={""}/>);
+    render(<CodeOutput code={""} signedIn={true}/>);
     
     const codeOutput = screen.getByTestId('CodeOutput');
 

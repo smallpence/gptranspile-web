@@ -7,7 +7,7 @@ describe('<CodeInput />', () => {
   test('it should mount', () => {
     const [code, setCode] = useState('')
 
-    render(<CodeInput code={code} setCode={setCode}/>);
+    render(<CodeInput code={code} setCode={setCode} signedIn={true}/>);
     
     const codeInput = screen.getByTestId('CodeInput');
 
