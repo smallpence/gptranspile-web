@@ -17,27 +17,27 @@ function CodeOutput(props: {code: string, signedIn: boolean}) {
     const [output, setOutput] = useState("");
     const url = process.env["REACT_APP_URL"]
 
-    const queryGPT = async () => {
-        if (!props.signedIn) return "not signed in";
-
-        const res = await fetch(`${url}/backend/gpt3`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                'code': props.code,
-                'language': "java"
-            }
-        });
-        if (!res.ok) return "error"
-        return await res.text();
-    }
-
     useEffect(() => {
+        const queryGPT = async () => {
+            if (!props.signedIn) return "not signed in";
+
+            const res = await fetch(`${url}/backend/gpt3`, {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    'code': props.code,
+                    'language': "java"
+                }
+            });
+            if (!res.ok) return "error"
+            return await res.text();
+        }
+
         (async () => {
             const data = await queryGPT()
             setOutput(data)
         })();
-    }, [props.code])
+    }, [props.code, props.signedIn, url])
 
     return <div className={styles.CodeOutput} data-testid="CodeOutput">
         {output}

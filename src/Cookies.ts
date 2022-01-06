@@ -8,5 +8,5 @@ function getSession(): string | undefined {
 
 export function hasSession(): boolean {
     console.log(getSession())
-    return getSession() != undefined
+    return getSession() !== undefined
 }
