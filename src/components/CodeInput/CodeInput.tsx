@@ -1,18 +1,23 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {CSSProperties, useState} from 'react';
 import styles from './CodeInput.module.css';
-import {Container, Textarea, Modal, Button} from "@mantine/core";
+import {Textarea, Modal, Button, Text, Select} from "@mantine/core";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import DarkStyle from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
+import {SetState} from "../../Types";
 
 
 function CodeInput(props: {
     code: string,
-    setCode: Dispatch<SetStateAction<string>>,
-    signedIn: boolean
+    setCode: SetState<string>,
+    signedIn: boolean,
+    setCodeView: SetState<boolean>,
+    setGenView: SetState<boolean>,
+    style?: CSSProperties
 }) {
     const [opened, setOpened] = useState(false);
     const [buffer, setBuffer] = useState("")
 
-    return <Container>
+    return <div className={styles.CodeInput} style={props.style}>
         <Modal
             opened={opened}
             onClose={() => setOpened(false)}
@@ -31,11 +36,22 @@ function CodeInput(props: {
                 props.setCode(buffer);
             }}>Close</Button>
         </Modal>
-        <SyntaxHighlighter language="kotlin">{props.code}</SyntaxHighlighter>
+        <div>
+            <Text size="xl" className={styles.title}>Your Code</Text>
+        </div>
+        <SyntaxHighlighter language="kotlin" style={DarkStyle}>{props.code}</SyntaxHighlighter>
         { props.signedIn &&
             <Button onClick={() => setOpened(true)}>Edit...</Button>
         }
-    </Container>
+        <div className={styles.footer}>
+            <Text size="xl">Convert to...</Text>
+            <Select data={['a']}/>
+            <Button className={styles.convert} size="xl" onClick={() => {
+                props.setCodeView(false);
+                setTimeout(() => props.setGenView(true), 350);
+            }}>Convert</Button>
+        </div>
+    </div>
 }
 
 

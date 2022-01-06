@@ -1,1 +1,29 @@
-.CodeInput {}
+.CodeInput {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+}
+
+.title {
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+.header {
+
+}
+
+.footer {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.convert {
+    grid-column: 4;
+}

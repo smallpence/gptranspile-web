@@ -1,1 +1,25 @@
-.CodeOutput {}
+.CodeOutput {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+}
+
+.title {
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+.header {
+
+}
+
+.footer {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.retry {
+    margin-top: 1rem;
+}
