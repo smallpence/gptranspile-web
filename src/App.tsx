@@ -1,19 +1,42 @@
 import React from 'react';
-import {AppShell, Header, Title, Container} from "@mantine/core";
-import GithubSignin from "./components/GithubSignin/GithubSignin";
+import {AppShell, MantineProvider, Paper} from "@mantine/core";
 import {hasSession} from "./Cookies";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
-
+import './App.css'
+import Header from './components/Header/Header';
+import Footer from "./components/Footer/Footer";
 
 function App() {
     return (
-          <AppShell
-              header={<Header height={60} padding = "xs"><Title>GPTranspile</Title><GithubSignin signedIn={hasSession()}/></Header>}
-          >
-              <Container size="md">
-                  <CodeEditor signedIn={hasSession()}/>
-              </Container>
-      </AppShell>
+        <MantineProvider theme={{
+            colors: {
+                'brand': [
+                    "#FEE6F3",
+                    "#FDBADD",
+                    "#FC8DC7",
+                    "#FB60B1",
+                    "#F9339B",
+                    "#F80785",
+                    "#C7056A",
+                    "#950450",
+                    "#630335",
+                    "#32011B"
+                ]
+
+            },
+            primaryColor: "brand",
+            colorScheme: 'dark',
+        }}
+        >
+            <AppShell padding={0}
+                header={<Header/>}
+            >
+                <Paper className="background">
+                    <CodeEditor signedIn={hasSession()}/>
+                </Paper>
+                <Footer/>
+            </AppShell>
+        </MantineProvider>
   );
 }
 
