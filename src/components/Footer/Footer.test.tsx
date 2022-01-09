@@ -5,7 +5,7 @@ import Footer from './Footer';
 
 describe('<Footer />', () => {
   test('it should mount', () => {
-    render(<Footer />);
+    render(<Footer sessionState={{state: "signedOut", signedIn: false}}/>);
     
     const footer = screen.getByTestId('Footer');
 

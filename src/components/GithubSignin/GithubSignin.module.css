@@ -1,1 +1,15 @@
-.GithubSignin {}
+.GithubSignin {
+    margin: 0.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 0.5rem;
+}
+
+.logo {
+    height: 1.8rem;
+}
+
+.signin {
+    margin-top: auto;
+}

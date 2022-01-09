@@ -5,7 +5,7 @@ import GithubSignin from './GithubSignin';
 
 describe('<GithubSignin />', () => {
   test('it should mount', () => {
-    render(<GithubSignin signedIn={true} />);
+    render(<GithubSignin sessionState={{state: "signedOut", signedIn: false}} />);
     
     const githubSignin = screen.getByTestId('GithubSignin');
 

@@ -5,7 +5,7 @@ import CodeEditor from './CodeEditor';
 
 describe('<CodeEditor />', () => {
   test('it should mount', () => {
-    render(<CodeEditor signedIn={true} />);
+    render(<CodeEditor sessionState={{state: "signedOut", signedIn: false}} />);
     
     const codeEditor = screen.getByTestId('CodeEditor');
 

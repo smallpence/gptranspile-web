@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppShell, MantineProvider, Paper} from "@mantine/core";
-import {hasSession} from "./Cookies";
+import {getSessionStateObservable} from "./Session";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
 import './App.css'
 import Header from './components/Header/Header';
 import Footer from "./components/Footer/Footer";
+import {SessionState} from "./Types";
 
 function App() {
+    const [session, setSession] = useState<SessionState>({ state: "signedOut", signedIn: false })
+
+    const observable = getSessionStateObservable();
+
+    useEffect(() => {
+        observable.subscribe(setSession)
+    }, [])
+
     return (
         <MantineProvider theme={{
             colors: {
@@ -32,9 +41,9 @@ function App() {
                 header={<Header/>}
             >
                 <Paper className="background">
-                    <CodeEditor signedIn={hasSession()}/>
+                    <CodeEditor sessionState={session}/>
                 </Paper>
-                <Footer/>
+                <Footer sessionState={session}/>
             </AppShell>
         </MantineProvider>
   );

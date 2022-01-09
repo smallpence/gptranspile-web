@@ -1,25 +1,13 @@
 import React, {CSSProperties, useEffect, useState} from 'react';
 import styles from './CodeOutput.module.css';
 import {Button, Text} from "@mantine/core";
-import {SetState} from "../../Types";
+import {SessionState, SetState} from "../../Types";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import DarkStyle from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 
-interface GPT3Response {
-    id: string,
-    object: string,
-    created: number,
-    model: string,
-    choices: [ {
-        text: string,
-        index: number,
-        finish_reason: string
-    } ]
-}
-
 function CodeOutput(props: {
     code: string,
-    signedIn: boolean,
+    sessionState: SessionState,
     setCodeView: SetState<boolean>,
     setGenView: SetState<boolean>,
     style?: CSSProperties
@@ -29,7 +17,7 @@ function CodeOutput(props: {
 
     useEffect(() => {
         const queryGPT = async () => {
-            if (!props.signedIn) return "not signed in";
+            if (!props.sessionState.signedIn) return "not signed in";
 
             const res = await fetch(`${url}/backend/gpt3`, {
                 method: "GET",
@@ -47,7 +35,7 @@ function CodeOutput(props: {
             const data = await queryGPT()
             setOutput(data)
         })();
-    }, [props.code, props.signedIn, url])
+    }, [props.code, props.sessionState.signedIn, url])
 
     return <div className={styles.CodeOutput} data-testid="CodeOutput" style={props.style}>
         <div>

@@ -3,13 +3,13 @@ import styles from './CodeInput.module.css';
 import {Textarea, Modal, Button, Text, Select} from "@mantine/core";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import DarkStyle from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
-import {SetState} from "../../Types";
+import {SessionState, SetState} from "../../Types";
 
 
 function CodeInput(props: {
     code: string,
     setCode: SetState<string>,
-    signedIn: boolean,
+    sessionState: SessionState,
     setCodeView: SetState<boolean>,
     setGenView: SetState<boolean>,
     style?: CSSProperties
@@ -40,7 +40,7 @@ function CodeInput(props: {
             <Text size="xl" className={styles.title}>Your Code</Text>
         </div>
         <SyntaxHighlighter language="kotlin" style={DarkStyle}>{props.code}</SyntaxHighlighter>
-        { props.signedIn &&
+        { props.sessionState.signedIn &&
             <Button onClick={() => setOpened(true)}>Edit...</Button>
         }
         <div className={styles.footer}>

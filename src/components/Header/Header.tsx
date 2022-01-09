@@ -9,7 +9,6 @@ const Header = () => (
         backgroundColor: theme.colors.brand[8]
     }))}><div className="headercontainer">
         <img src={logo} className="logo" alt="logo"/>
-        {/*<div className="signin"><GithubSignin signedIn={hasSession()}/></div>*/}
     </div></MantineHeader>
 );
 

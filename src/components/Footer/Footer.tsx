@@ -1,15 +1,18 @@
 import React from 'react';
 import styles from './Footer.module.css';
 import {Header as MantineHeader} from "@mantine/core";
-import logo from "../../resources/logolong.svg";
+import GithubSignin from "../GithubSignin/GithubSignin";
+import {SessionState} from "../../Types";
 
 
-const Footer = () => {
+const Footer = (props: {
+    sessionState: SessionState
+}) => {
     return <MantineHeader height={66} padding="xs" sx={(theme => ({
         backgroundColor: theme.colors.brand[8]
     }))}>
-        <div className="headercontainer">
-            <img src={logo} className="logo" alt="logo"/>
+        <div className="">
+            <GithubSignin sessionState={props.sessionState}/>
         </div>
     </MantineHeader>
 }
