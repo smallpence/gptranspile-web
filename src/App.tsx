@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {AppShell, MantineProvider, Paper} from "@mantine/core";
-import {getSessionStateObservable} from "./Session";
+import {getSessionStateSubject} from "./Session";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
 import './App.css'
 import Header from './components/Header/Header';
@@ -10,10 +10,10 @@ import {SessionState} from "./Types";
 function App() {
     const [session, setSession] = useState<SessionState>({ state: "signedOut", signedIn: false })
 
-    const observable = getSessionStateObservable();
+    const subject = getSessionStateSubject();
 
     useEffect(() => {
-        observable.subscribe(setSession)
+        subject.subscribe(setSession)
     }, [])
 
     return (

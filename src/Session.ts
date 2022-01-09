@@ -1,18 +1,30 @@
 import Cookies from "universal-cookie";
 import {SessionState} from "./Types";
-import {catchError, map, Observable, of, startWith, switchMap} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, of, startWith, switchMap} from "rxjs";
 import {ajax, AjaxResponse} from "rxjs/ajax";
 
-const session = new Cookies()
-const url = process.env["REACT_APP_URL"]
+const cookies = new Cookies();
+const url = process.env["REACT_APP_URL"];
+const session = new BehaviorSubject<SessionState>({state: "signedOut", signedIn: false});
+
+getSessionStateObservable().subscribe((value => session.next(value)));
 
 function getSession(): string | undefined {
-    return session.get('gptranspile_session')
+    return cookies.get('gptranspile_session');
+}
+
+export function endSession() {
+    cookies.remove('gptranspile_session');
+    session.next({state: "signedOut", signedIn: false});
 }
 
 type UserResponse = { username: string, user_image: string }
 
-export function getSessionStateObservable(): Observable<SessionState> {
+export function getSessionStateSubject(): BehaviorSubject<SessionState> {
+    return session
+}
+
+function getSessionStateObservable(): Observable<SessionState> {
     const session = getSession()
     if (session) {
         // query backend for this session

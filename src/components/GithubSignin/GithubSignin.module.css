@@ -10,6 +10,15 @@
     height: 1.8rem;
 }
 
-.signin {
+.signinbox {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.signinText {
     margin-top: auto;
+}
+
+.signout {
+    cursor: pointer;
 }
