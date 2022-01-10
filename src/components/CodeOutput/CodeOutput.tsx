@@ -1,6 +1,6 @@
 import React, {CSSProperties, useEffect, useState} from 'react';
 import styles from './CodeOutput.module.css';
-import {Button, Text} from "@mantine/core";
+import {Button, LoadingOverlay, Text} from "@mantine/core";
 import {SessionState, SetState} from "../../Types";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import DarkStyle from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
@@ -13,6 +13,7 @@ function CodeOutput(props: {
     style?: CSSProperties
 }) {
     const [output, setOutput] = useState("");
+    const [loading, setLoading] = useState(false);
     const url = process.env["REACT_APP_URL"]
 
     useEffect(() => {
@@ -32,8 +33,10 @@ function CodeOutput(props: {
         }
 
         (async () => {
-            const data = await queryGPT()
-            setOutput(data)
+            setLoading(true);
+            const data = await queryGPT();
+            setLoading(false);
+            setOutput(data);
         })();
     }, [props.code, props.sessionState.signedIn, url])
 
@@ -41,6 +44,7 @@ function CodeOutput(props: {
         <div>
             <Text size="xl" className={styles.title}>GPT3's Response</Text>
         </div>
+        <LoadingOverlay visible={loading}/>
         <SyntaxHighlighter language="kotlin" style={DarkStyle}>{output}</SyntaxHighlighter>
         <div className={styles.footer}>
             <Button size="xl" onClick={() => {
