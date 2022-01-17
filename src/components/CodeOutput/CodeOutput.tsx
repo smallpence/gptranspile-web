@@ -1,4 +1,4 @@
-import React, {CSSProperties, useEffect, useState} from 'react';
+import React, {CSSProperties, useCallback, useEffect, useState} from 'react';
 import styles from './CodeOutput.module.css';
 import {Button, LoadingOverlay, Text} from "@mantine/core";
 import {SessionState, SetState} from "../../Types";
@@ -16,29 +16,31 @@ function CodeOutput(props: {
     const [loading, setLoading] = useState(false);
     const url = process.env["REACT_APP_URL"]
 
+    const queryGPT = useCallback(async () => {
+        if (!props.sessionState.signedIn) return "not signed in";
+
+        const res = await fetch(`${url}/backend/gpt3`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                'code': JSON.stringify(props.code),
+                'language': "java"
+            }
+        });
+        if (!res.ok) return "error"
+        return await res.text();
+    },[props.code, props.sessionState, url]);
+
+    const displayGPT = useCallback( async () => {
+        setLoading(true);
+        const data = await queryGPT();
+        setLoading(false);
+        setOutput(data);
+    }, [queryGPT]);
+
     useEffect(() => {
-        const queryGPT = async () => {
-            if (!props.sessionState.signedIn) return "not signed in";
-
-            const res = await fetch(`${url}/backend/gpt3`, {
-                method: "GET",
-                credentials: "include",
-                headers: {
-                    'code': JSON.stringify(props.code),
-                    'language': "java"
-                }
-            });
-            if (!res.ok) return "error"
-            return await res.text();
-        }
-
-        (async () => {
-            setLoading(true);
-            const data = await queryGPT();
-            setLoading(false);
-            setOutput(data);
-        })();
-    }, [props.code, props.sessionState.signedIn, url])
+        displayGPT();
+    }, [props.code, props.sessionState.signedIn, displayGPT])
 
     return <div className={styles.CodeOutput} data-testid="CodeOutput" style={props.style}>
         <div>
@@ -47,9 +49,7 @@ function CodeOutput(props: {
         <LoadingOverlay visible={loading}/>
         <SyntaxHighlighter language="kotlin" style={DarkStyle}>{output}</SyntaxHighlighter>
         <div className={styles.footer}>
-            <Button size="xl" onClick={() => {
-
-            }}>Retry</Button>
+            <Button size="xl" onClick={() => {displayGPT();}}>Retry</Button>
             <Button className={styles.retry} size="lg" onClick={() => {
                 props.setGenView(false);
                 setTimeout(() => props.setCodeView(true), 150);
