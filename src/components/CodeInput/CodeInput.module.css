@@ -5,13 +5,23 @@
     height: 100%;
 }
 
-.title {
-    padding-top: 1rem;
-    padding-left: 1rem;
+.header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
+    padding: 1rem;
+    padding-bottom: 0;
 }
 
-.header {
+.inputlang {
+    grid-column: 3;
+}
 
+.title {
+    
 }
 
 .footer {

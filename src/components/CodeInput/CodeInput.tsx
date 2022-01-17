@@ -36,8 +36,9 @@ function CodeInput(props: {
                 props.setCode(buffer);
             }}>Close</Button>
         </Modal>
-        <div>
+        <div className={styles.header}>
             <Text size="xl" className={styles.title}>Your Code</Text>
+            <Select className={styles.inputlang} data={[{value: 'javascript', label: "JavaScript"}]} defaultValue="javascript"/>
         </div>
         <SyntaxHighlighter language="kotlin" style={DarkStyle}>{props.code}</SyntaxHighlighter>
         { props.sessionState.signedIn &&
@@ -45,7 +46,7 @@ function CodeInput(props: {
         }
         <div className={styles.footer}>
             <Text size="xl">Convert to...</Text>
-            <Select data={['a']}/>
+            <Select data={[{value: 'python', label: "Python"}]} defaultValue="python"/>
             <Button className={styles.convert} size="xl" onClick={() => {
                 props.setCodeView(false);
                 setTimeout(() => props.setGenView(true), 350);
