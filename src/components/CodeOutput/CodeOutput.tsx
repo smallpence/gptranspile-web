@@ -24,7 +24,7 @@ function CodeOutput(props: {
                 method: "GET",
                 credentials: "include",
                 headers: {
-                    'code': props.code,
+                    'code': JSON.stringify(props.code),
                     'language': "java"
                 }
             });
