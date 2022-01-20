@@ -8,7 +8,7 @@ describe('<CodeOutput />', () => {
     const [, setCodeView] = useState(false);
     const [, setGenView] = useState(false)
 
-    render(<CodeOutput code={""} sessionState={{state: "signedOut", signedIn: false}} setCodeView={setCodeView} setGenView={setGenView}/>);
+    render(<CodeOutput code={""} sessionState={{state: "signedOut", signedIn: false}} setCodeView={setCodeView} setGenView={setGenView} isDesktop={true}/>);
     
     const codeOutput = screen.getByTestId('CodeOutput');
 

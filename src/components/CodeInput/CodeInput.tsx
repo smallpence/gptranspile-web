@@ -12,7 +12,8 @@ function CodeInput(props: {
     sessionState: SessionState,
     setCodeView: SetState<boolean>,
     setGenView: SetState<boolean>,
-    style?: CSSProperties
+    style?: CSSProperties,
+    isDesktop: boolean
 }) {
     const [opened, setOpened] = useState(false);
     const [buffer, setBuffer] = useState("")
@@ -40,17 +41,19 @@ function CodeInput(props: {
             <Text size="xl" className={styles.title}>Your Code</Text>
             <Select className={styles.inputlang} data={[{value: 'javascript', label: "JavaScript"}]} defaultValue="javascript"/>
         </div>
-        <SyntaxHighlighter language="kotlin" style={DarkStyle}>{props.code}</SyntaxHighlighter>
-        { props.sessionState.signedIn &&
-            <Button onClick={() => setOpened(true)}>Edit...</Button>
-        }
+        <div style={{position: "relative"}}>
+            <SyntaxHighlighter language="kotlin" style={DarkStyle} customStyle={{height: "100%", padding: 0, margin: 0}}>{props.code}</SyntaxHighlighter>
+            <Button className={styles.edit} onClick={() => setOpened(true)}>Edit...</Button>
+        </div>
         <div className={styles.footer}>
             <Text size="xl">Convert to...</Text>
             <Select data={[{value: 'python', label: "Python"}]} defaultValue="python"/>
-            <Button className={styles.convert} size="xl" onClick={() => {
-                props.setCodeView(false);
-                setTimeout(() => props.setGenView(true), 350);
-            }}>Convert</Button>
+            {!props.isDesktop &&
+                <Button className={styles.convert} size="xl" onClick={() => {
+                    props.setCodeView(false);
+                    setTimeout(() => props.setGenView(true), 350);
+                }}>Convert</Button>
+            }
         </div>
     </div>
 }

@@ -10,7 +10,8 @@ function CodeOutput(props: {
     sessionState: SessionState,
     setCodeView: SetState<boolean>,
     setGenView: SetState<boolean>,
-    style?: CSSProperties
+    style?: CSSProperties,
+    isDesktop: boolean
 }) {
     const [output, setOutput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -43,18 +44,20 @@ function CodeOutput(props: {
     }, [props.code, props.sessionState.signedIn, displayGPT])
 
     return <div className={styles.CodeOutput} data-testid="CodeOutput" style={props.style}>
-        <div>
-            <Text size="xl" className={styles.title}>GPT3's Response</Text>
+        <div className={styles.header}>
+            <Text size="xl">GPT3's Response</Text>
         </div>
-        <LoadingOverlay visible={loading}/>
-        <SyntaxHighlighter language="kotlin" style={DarkStyle}>{output}</SyntaxHighlighter>
-        <div className={styles.footer}>
+        <div style={{position: 'relative'}}>
+            <LoadingOverlay visible={loading}/>
+            <SyntaxHighlighter language="kotlin" style={DarkStyle} customStyle={{height: "100%", padding: 0, margin: 0}}>{output}</SyntaxHighlighter>
+        </div>
+        {!props.isDesktop && <div className={styles.footer}>
             <Button size="xl" onClick={() => {displayGPT();}}>Retry</Button>
             <Button className={styles.retry} size="lg" onClick={() => {
                 props.setGenView(false);
                 setTimeout(() => props.setCodeView(true), 150);
             }}>Exit</Button>
-        </div>
+        </div>}
     </div>
 }
 

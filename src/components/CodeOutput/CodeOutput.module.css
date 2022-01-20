@@ -1,17 +1,14 @@
 .CodeOutput {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 5rem 1fr 10rem;
     height: 100%;
 }
 
-.title {
-    padding-top: 1rem;
-    padding-left: 1rem;
-}
-
 .header {
-
+    display: flex;
+    align-items: center;
+    padding: 1rem;
 }
 
 .footer {
@@ -22,4 +19,10 @@
 
 .retry {
     margin-top: 1rem;
+}
+
+@media screen and (min-width: 1224px) {
+    .CodeOutput {
+        grid-template-rows: 5rem 1fr 6rem;
+    }
 }
