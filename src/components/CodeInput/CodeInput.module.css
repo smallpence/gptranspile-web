@@ -25,6 +25,14 @@
     right: 0.5rem;
 }
 
+.arrowtail {
+    position: absolute;
+    top: 35%;
+    right: 0;
+    width: 100px;
+    height: 30%;
+}
+
 .footer {
     padding: 1rem;
     display: grid;
