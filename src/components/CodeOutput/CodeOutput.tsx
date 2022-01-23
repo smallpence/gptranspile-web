@@ -1,9 +1,7 @@
 import React, {CSSProperties, useCallback, useEffect, useState} from 'react';
 import styles from './CodeOutput.module.css';
-import {Box, Button, createStyles, LoadingOverlay, Text} from "@mantine/core";
+import {Box, Button, Code, createStyles, LoadingOverlay, Text} from "@mantine/core";
 import {SessionState, SetState} from "../../Types";
-import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
-import DarkStyle from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 import {GITHUB_URL} from "../../Session";
 
 function CodeOutput(props: {
@@ -52,12 +50,12 @@ function CodeOutput(props: {
         </div>
         <div style={{position: 'relative'}}>
             <LoadingOverlay visible={loading}/>
-            <SyntaxHighlighter language="kotlin" style={DarkStyle} customStyle={{height: "100%", padding: 0, margin: 0}}>{output}</SyntaxHighlighter>
+            <Code block sx={(_ => ({height: "100%", width: props.isDesktop ? "calc(50vw - 0.5rem)" : "100vw", padding: 0}))}>{output}</Code>
             {props.isDesktop && <div>
-                <Box className={styles.arrowtail} sx={(theme => ({backgroundColor: theme.colors.dark[6]}))}/>
+                <Box className={styles.arrowtail} sx={(theme => ({backgroundColor: theme.colors.dark[5]}))}/>
                 <Box className={styles.arrowhead}>
                     <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <polygon points="0, 0, 100, 50, 0, 100" fill={globalStyles.theme.colors.dark[6]} />
+                        <polygon points="0, 0, 100, 50, 0, 100" fill={globalStyles.theme.colors.dark[5]} />
                     </svg>
                 </Box>
             </div>}

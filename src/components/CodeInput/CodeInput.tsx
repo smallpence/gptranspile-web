@@ -1,8 +1,6 @@
 import React, {CSSProperties, useState} from 'react';
 import styles from './CodeInput.module.css';
-import {Textarea, Modal, Button, Text, Select, Box} from "@mantine/core";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import DarkStyle from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
+import {Textarea, Modal, Button, Text, Select, Box, Code} from "@mantine/core";
 import {SessionState, SetState} from "../../Types";
 
 
@@ -42,10 +40,10 @@ function CodeInput(props: {
             <Select className={styles.inputlang} data={[{value: 'javascript', label: "JavaScript"}]} defaultValue="javascript"/>
         </div>
         <div style={{position: "relative"}}>
-            <SyntaxHighlighter language="kotlin" style={DarkStyle} customStyle={{height: "100%", padding: 0, margin: 0}}>{props.code}</SyntaxHighlighter>
+            <Code block sx={(_ => ({height: "100%", width: props.isDesktop ? "calc(50vw - 0.5rem)" : "100vw", padding: 0}))}>{props.code}</Code>
             <Button className={styles.edit} onClick={() => setOpened(true)}>Edit...</Button>
             {props.isDesktop && <Box className={styles.arrowtail} sx={(theme => ({
-                backgroundColor: theme.colors.dark[6]
+                backgroundColor: theme.colors.dark[5]
             }))}/>}
         </div>
         <div className={styles.footer}>
