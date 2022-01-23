@@ -9,7 +9,7 @@ import {useMediaQuery} from "@mantine/hooks";
 function CodeEditor (props: {
     sessionState: SessionState
 }) {
-    const [code, setCode] = useState("");
+    const [code, setCode] = useState("console.log(\"hello world!\");");
     const [codeView, setCodeView] = useState(true)
     const [genView, setGenView] = useState(false)
 
