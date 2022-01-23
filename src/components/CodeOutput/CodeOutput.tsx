@@ -51,13 +51,16 @@ function CodeOutput(props: {
             <LoadingOverlay visible={loading}/>
             <SyntaxHighlighter language="kotlin" style={DarkStyle} customStyle={{height: "100%", padding: 0, margin: 0}}>{output}</SyntaxHighlighter>
         </div>
-        {!props.isDesktop && <div className={styles.footer}>
-            <Button size="xl" onClick={() => {displayGPT();}}>Retry</Button>
-            <Button className={styles.retry} size="lg" onClick={() => {
+        <div className={styles.footer}>
+            <Button size="xl" onClick={() => {
+                displayGPT();
+            }}>Retry</Button>
+            {!props.isDesktop && <div style={{display: "grid"}}><Button className={styles.retry} size="lg" onClick={() => {
                 props.setGenView(false);
                 setTimeout(() => props.setCodeView(true), 150);
-            }}>Exit</Button>
-        </div>}
+            }}>Exit</Button></div>}
+
+        </div>
     </div>
 }
 
