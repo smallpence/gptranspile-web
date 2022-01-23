@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {AppShell, MantineProvider, Paper} from "@mantine/core";
+import {AppShell, LoadingOverlay, MantineProvider, Paper} from "@mantine/core";
 import {getSessionStateSubject} from "./Session";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
 import './App.css'
@@ -42,6 +42,7 @@ function App() {
             >
                 <Paper className="background">
                     <CodeEditor sessionState={session}/>
+                    <LoadingOverlay visible={session.state==="signingIn"}/>
                 </Paper>
                 <Footer sessionState={session}/>
             </AppShell>

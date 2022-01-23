@@ -4,6 +4,7 @@ import {Button, LoadingOverlay, Text} from "@mantine/core";
 import {SessionState, SetState} from "../../Types";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import DarkStyle from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
+import {GITHUB_URL} from "../../Session";
 
 function CodeOutput(props: {
     code: string,
@@ -52,9 +53,13 @@ function CodeOutput(props: {
             <SyntaxHighlighter language="kotlin" style={DarkStyle} customStyle={{height: "100%", padding: 0, margin: 0}}>{output}</SyntaxHighlighter>
         </div>
         <div className={styles.footer}>
-            <Button size="xl" onClick={() => {
-                displayGPT();
-            }}>Retry</Button>
+            {props.sessionState.signedIn ?
+                <Button size="xl" onClick={() => {
+                    displayGPT();
+                }}>Retry</Button>
+                :
+                <Button size="xl" component="a" href={GITHUB_URL}>Sign in</Button>
+            }
             {!props.isDesktop && <div style={{display: "grid"}}><Button className={styles.retry} size="lg" onClick={() => {
                 props.setGenView(false);
                 setTimeout(() => props.setCodeView(true), 150);

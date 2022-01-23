@@ -66,3 +66,8 @@ function getSessionStateObservable(): Observable<SessionState> {
     //     }
     // });
 }
+
+const CLIENT_ID = process.env["REACT_APP_GITHUB_OAUTH_CLIENT_ID"]
+const URL = process.env["REACT_APP_URL"]
+
+export const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${URL}/backend/auth`
