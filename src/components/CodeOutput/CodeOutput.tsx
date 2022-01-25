@@ -1,8 +1,9 @@
 import React, {CSSProperties, useCallback, useEffect, useState} from 'react';
 import styles from './CodeOutput.module.css';
-import {Box, Button, Code, createStyles, LoadingOverlay, Text} from "@mantine/core";
+import {Box, Button, createStyles, LoadingOverlay, Text} from "@mantine/core";
 import {SessionState, SetState} from "../../Types";
 import {GITHUB_URL} from "../../Session";
+import CodeBox from "../CodeBox/CodeBox";
 
 function CodeOutput(props: {
     code: string,
@@ -48,9 +49,8 @@ function CodeOutput(props: {
         <div className={styles.header}>
             <Text size="xl">GPT3's Response</Text>
         </div>
-        <div style={{position: 'relative'}}>
+        <CodeBox code={output} isDesktop={props.isDesktop}>
             <LoadingOverlay visible={loading}/>
-            <Code block sx={(_ => ({height: "100%", width: props.isDesktop ? "calc(50vw - 0.5rem)" : "100vw", padding: 0}))}>{output}</Code>
             {props.isDesktop && <div>
                 <Box className={styles.arrowtail} sx={(theme => ({backgroundColor: theme.colors.dark[5]}))}/>
                 <Box className={styles.arrowhead}>
@@ -59,7 +59,7 @@ function CodeOutput(props: {
                     </svg>
                 </Box>
             </div>}
-        </div>
+        </CodeBox>
         <div className={styles.footer}>
             {props.sessionState.signedIn ?
                 <Button size="xl" onClick={() => {

@@ -1,0 +1,17 @@
+.CodeBox {}
+
+.code {
+    height: 100%;
+    padding: 0;
+    background-color: transparent;
+    z-index: 2;
+    position: relative;
+}
+
+.codebg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}

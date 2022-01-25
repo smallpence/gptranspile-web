@@ -1,7 +1,8 @@
 import React, {CSSProperties, useState} from 'react';
 import styles from './CodeInput.module.css';
-import {Textarea, Modal, Button, Text, Select, Box, Code} from "@mantine/core";
+import {Textarea, Modal, Button, Text, Select, Box} from "@mantine/core";
 import {SessionState, SetState} from "../../Types";
+import CodeBox from "../CodeBox/CodeBox";
 
 
 function CodeInput(props: {
@@ -39,13 +40,20 @@ function CodeInput(props: {
             <Text size="xl" className={styles.title}>Your Code</Text>
             <Select className={styles.inputlang} data={[{value: 'javascript', label: "JavaScript"}]} defaultValue="javascript"/>
         </div>
-        <div style={{position: "relative"}}>
-            <Code block sx={(_ => ({height: "100%", width: props.isDesktop ? "calc(50vw - 0.5rem)" : "100vw", padding: 0}))}>{props.code}</Code>
+        {/*<div style={{position: "relative"}}>*/}
+        {/*    <Box className={styles.codebg} sx={(theme => ({backgroundColor: theme.colors.dark[4]}))}/>*/}
+        {/*    <Code block className={styles.code} sx={(_ => ({width: props.isDesktop ? "calc(50vw - 0.5rem)" : "100vw"}))}>{props.code}</Code>*/}
+        {/*    <Button className={styles.edit} onClick={() => setOpened(true)}>Edit...</Button>*/}
+        {/*    {props.isDesktop && <Box className={styles.arrowtail} sx={(theme => ({*/}
+        {/*        backgroundColor: theme.colors.dark[5]*/}
+        {/*    }))}/>}*/}
+        {/*</div>*/}
+        <CodeBox code={props.code} isDesktop={props.isDesktop}>
             <Button className={styles.edit} onClick={() => setOpened(true)}>Edit...</Button>
             {props.isDesktop && <Box className={styles.arrowtail} sx={(theme => ({
                 backgroundColor: theme.colors.dark[5]
             }))}/>}
-        </div>
+        </CodeBox>
         <div className={styles.footer}>
             <Text size="xl">Convert to...</Text>
             <Select data={[{value: 'python', label: "Python"}]} defaultValue="python"/>

@@ -23,6 +23,7 @@
     position: absolute;
     bottom: 0.5rem;
     right: 0.5rem;
+    z-index: 2;
 }
 
 .arrowtail {
@@ -31,6 +32,7 @@
     right: 0;
     width: 100px;
     height: 6rem;
+    z-index: 1;
 }
 
 .footer {
