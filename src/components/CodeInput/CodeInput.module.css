@@ -27,10 +27,10 @@
 
 .arrowtail {
     position: absolute;
-    top: 35%;
+    top: calc(50% - 3rem);
     right: 0;
     width: 100px;
-    height: 30%;
+    height: 6rem;
 }
 
 .footer {

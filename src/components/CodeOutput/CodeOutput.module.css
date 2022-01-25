@@ -19,19 +19,19 @@
 
 .arrowtail {
     position: absolute;
-    top: 35%;
+    top: calc(50% - 3rem);
     left: 0;
     width: 50px;
-    height: 30%;
+    height: 6rem;
     z-index: 0;
 }
 
 .arrowhead {
     position: absolute;
-    top: 25%;
+    top: calc(50% - 6rem);
     left: 20px;
     width: 100px;
-    height: 50%;
+    height: 12rem;
     z-index: 0;
 }
 
