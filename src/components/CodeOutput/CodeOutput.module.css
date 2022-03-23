@@ -43,6 +43,13 @@
     height: 100%;
 }
 
+.spinner {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
 .retry {
     margin-top: 1rem;
 }
