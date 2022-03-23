@@ -1,61 +1,61 @@
 .CodeOutput {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 5rem 1fr 10rem;
-    height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr 10rem;
+  height: 100%;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
 }
 
 .footer {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .arrowtail {
-    position: absolute;
-    top: calc(50% - 3rem);
-    left: 0;
-    width: 50px;
-    height: 6rem;
-    z-index: 0;
+  position: absolute;
+  top: calc(50% - 3rem);
+  left: 0;
+  width: 50px;
+  height: 6rem;
+  z-index: 0;
 }
 
 .arrowhead {
-    position: absolute;
-    top: calc(50% - 6rem);
-    left: 20px;
-    width: 100px;
-    height: 12rem;
-    z-index: 0;
+  position: absolute;
+  top: calc(50% - 6rem);
+  left: 20px;
+  width: 100px;
+  height: 12rem;
+  z-index: 0;
 }
 
 .arrowhead svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .spinner {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .retry {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 @media screen and (min-width: 1224px) {
-    .CodeOutput {
-        grid-template-rows: 5rem 1fr 6rem;
-    }
+  .CodeOutput {
+    grid-template-rows: 5rem 1fr 6rem;
+  }
 }

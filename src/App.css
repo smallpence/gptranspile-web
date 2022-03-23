@@ -1,11 +1,11 @@
 .headercontainer {
-    display: flex;
-    justify-content: center;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
 }
 
 .background {
-    width: 100%;
-    height: calc(100vh - 2 * var(--header-size));
-    border-radius: 0;
+  width: 100%;
+  height: calc(100vh - 2 * var(--header-size));
+  border-radius: 0;
 }

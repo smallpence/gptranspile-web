@@ -1,57 +1,57 @@
 .CodeInput {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 5rem 1fr 6rem;
-    height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr 6rem;
+  height: 100%;
 }
 
 .header {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0.5rem;
-    justify-items: center;
-    align-items: center;
-    padding: 1rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0.5rem;
+  justify-items: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .inputlang {
-    grid-column: 3;
+  grid-column: 3;
 }
 
 .edit {
-    position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    z-index: 2;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
 }
 
 .arrowtail {
-    position: absolute;
-    top: calc(50% - 3rem);
-    right: 0;
-    width: 100px;
-    height: 6rem;
-    z-index: 1;
+  position: absolute;
+  top: calc(50% - 3rem);
+  right: 0;
+  width: 100px;
+  height: 6rem;
+  z-index: 1;
 }
 
 .spinner {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .footer {
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: auto auto 1fr auto;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0.5rem;
-    justify-items: center;
-    align-items: center;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0.5rem;
+  justify-items: center;
+  align-items: center;
 }
 
 .convert {
-    grid-column: 4;
+  grid-column: 4;
 }
