@@ -10,6 +10,9 @@ function CodeEditor(props: { sessionState: SessionState }) {
   const [code, setCode] = useState('console.log("hello world!");');
   const [codeView, setCodeView] = useState(true);
   const [genView, setGenView] = useState(false);
+  const [shapeVisisble, setShapeVisible] = useState<
+    "input" | "transition" | "output"
+  >("input");
 
   const isDesktop = useMediaQuery("(min-width: 1224px)");
 
@@ -22,6 +25,11 @@ function CodeEditor(props: { sessionState: SessionState }) {
       setGenView={setGenView}
       style={style}
       isDesktop={isDesktop}
+      hovered={shapeVisisble === "input"}
+      onMouseEnter={() => {
+        if (shapeVisisble === "output") setShapeVisible("transition");
+      }}
+      onAnimationFinish={() => setShapeVisible("output")}
     />
   );
 
@@ -33,6 +41,11 @@ function CodeEditor(props: { sessionState: SessionState }) {
       setGenView={setGenView}
       style={style}
       isDesktop={isDesktop}
+      hovered={shapeVisisble === "output"}
+      onMouseEnter={() => {
+        if (shapeVisisble === "input") setShapeVisible("transition");
+      }}
+      onAnimationFinish={() => setShapeVisible("input")}
     />
   );
 

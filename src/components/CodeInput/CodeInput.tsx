@@ -4,6 +4,7 @@ import { Textarea, Modal, Button, Text, Select, Box } from "@mantine/core";
 import { SessionState, SetState } from "../../Types";
 import CodeBox from "../CodeBox/CodeBox";
 import Spinny from "../Spinny/Spinny";
+import { Transition } from "@mantine/core";
 
 function CodeInput(props: {
   code: string;
@@ -13,6 +14,9 @@ function CodeInput(props: {
   setGenView: SetState<boolean>;
   style?: CSSProperties;
   isDesktop: boolean;
+  hovered: boolean;
+  onMouseEnter: () => void;
+  onAnimationFinish: () => void;
 }) {
   const [opened, setOpened] = useState(false);
   const [buffer, setBuffer] = useState("");
@@ -59,7 +63,11 @@ function CodeInput(props: {
       {/*        backgroundColor: theme.colors.dark[5]*/}
       {/*    }))}/>}*/}
       {/*</div>*/}
-      <CodeBox code={props.code} isDesktop={props.isDesktop}>
+      <CodeBox
+        code={props.code}
+        isDesktop={props.isDesktop}
+        onMouseEnter={props.onMouseEnter}
+      >
         <Button className={styles.edit} onClick={() => setOpened(true)}>
           Edit...
         </Button>
@@ -71,9 +79,17 @@ function CodeInput(props: {
             })}
           />
         )}
-        <div className={styles.spinner}>
-          <Spinny shape={"square"} />
-        </div>
+        <Transition
+          transition={"slide-left"}
+          mounted={!props.isDesktop || props.hovered}
+          onExited={props.onAnimationFinish}
+        >
+          {(transition) => (
+            <div style={transition} className={styles.spinner}>
+              <Spinny shape={"square"} />
+            </div>
+          )}
+        </Transition>
       </CodeBox>
       <div className={styles.footer}>
         <Text size="xl">Convert to...</Text>

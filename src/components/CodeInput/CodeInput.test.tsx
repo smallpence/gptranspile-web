@@ -17,6 +17,9 @@ describe("<CodeInput />", () => {
         setCodeView={setCodeView}
         setGenView={setGenView}
         isDesktop={true}
+        hovered={true}
+        onMouseEnter={() => {}}
+        onAnimationFinish={() => {}}
       />
     );
 

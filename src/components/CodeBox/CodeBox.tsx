@@ -5,10 +5,11 @@ import { Box, Code } from "@mantine/core";
 interface CodeBoxProps {
   code: string;
   isDesktop: boolean;
+  onMouseEnter?: () => void;
 }
 
 const CodeBox: FC<CodeBoxProps> = (props) => (
-  <div style={{ position: "relative" }}>
+  <div onMouseEnter={props.onMouseEnter} style={{ position: "relative" }}>
     <Box
       className={styles.codebg}
       sx={(theme) => ({ backgroundColor: theme.colors.dark[4] })}

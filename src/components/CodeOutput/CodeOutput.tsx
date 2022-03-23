@@ -1,6 +1,13 @@
 import React, { CSSProperties, useCallback, useEffect, useState } from "react";
 import styles from "./CodeOutput.module.css";
-import { Box, Button, createStyles, LoadingOverlay, Text } from "@mantine/core";
+import {
+  Box,
+  Button,
+  createStyles,
+  LoadingOverlay,
+  Text,
+  Transition,
+} from "@mantine/core";
 import { SessionState, SetState } from "../../Types";
 import { GITHUB_URL } from "../../Session";
 import CodeBox from "../CodeBox/CodeBox";
@@ -12,7 +19,10 @@ function CodeOutput(props: {
   setCodeView: SetState<boolean>;
   setGenView: SetState<boolean>;
   style?: CSSProperties;
+  hovered: boolean;
   isDesktop: boolean;
+  onMouseEnter: () => void;
+  onAnimationFinish: () => void;
 }) {
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -55,7 +65,11 @@ function CodeOutput(props: {
       <div className={styles.header}>
         <Text size="xl">GPT3's Response</Text>
       </div>
-      <CodeBox code={output} isDesktop={props.isDesktop}>
+      <CodeBox
+        code={output}
+        isDesktop={props.isDesktop}
+        onMouseEnter={props.onMouseEnter}
+      >
         <LoadingOverlay visible={loading} />
         {props.isDesktop && (
           <div>
@@ -73,9 +87,17 @@ function CodeOutput(props: {
             </Box>
           </div>
         )}
-        <div className={styles.spinner}>
-          <Spinny shape={"triangle"} />
-        </div>
+        <Transition
+          transition={"slide-right"}
+          mounted={!props.isDesktop || props.hovered}
+          onExited={props.onAnimationFinish}
+        >
+          {(transition) => (
+            <div className={styles.spinner} style={transition}>
+              <Spinny shape={"triangle"} />
+            </div>
+          )}
+        </Transition>
       </CodeBox>
       <div className={styles.footer}>
         {props.sessionState.signedIn ? (
